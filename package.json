@@ -1,0 +1,25 @@
+{
+  "name": "school-update",
+  "version": "1.0.0",
+  "description": "the backend for my final year project for an app that monitors a child activities at school and updates the parents",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server",
+    "start": "node server.js"
+  },
+  "author": "Godwin Odenigbo",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "crypto-random-string": "^3.3.0",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.2",
+    "googleapis": "^95.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.1",
+    "mongoose": "^6.2.1",
+    "nodemailer": "^6.7.2",
+    "validator": "^13.7.0"
+  }
+}
