@@ -73,7 +73,7 @@ module.exports.handleEventErrors = (err) => {
 
 //handle teacher errors
 module.exports.handleTeacherErrors = (err) => {
-    let errors = {name: '', position: ''};
+    let errors = {name: '', position: '', email: '', phone: ''};
 
     //validation errors
     if(err.message.includes('teacher validation failed')) {

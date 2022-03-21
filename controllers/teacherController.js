@@ -2,10 +2,10 @@ const Teacher = require('../models/Teacher');
 const errorController = require('./errorController');
 
 module.exports.createTeacher = async (req, res) => {
-    const {name, position}  = req.body;
+    const {name, position, email, phone}  = req.body;
     
     try{
-        const teacher = await Teacher.create({name, position});
+        const teacher = await Teacher.create({name, position,email, phone});
         res.status(201).json({ teacher: teacher._id, message: "success" });
     }catch(err){
         console.log(err);
