@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { isEmail } = require('validator');
 
 const teacherSchema = new mongoose.Schema({
     name:{
@@ -22,6 +23,11 @@ const teacherSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please enter the phone number"],
     },
+    image: {
+        type: Map,
+        of: String, 
+        required: [true, "Please upload student picture"]
+  },
 
 }, {timestamps: true});
 

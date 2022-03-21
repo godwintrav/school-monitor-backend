@@ -23,7 +23,10 @@ module.exports.register = async (req, res) => {
     const password = cryptoRandomString({length: 8});
 
     try{
-        const student = await Student.create({dateEnrolled, gender, firstName, lastName, email, dob, parentName, address, parentPhone, batch, password});
+        const student = await Student.create({dateEnrolled, gender, firstName, lastName, email, dob, parentName, address, parentPhone, batch, password, image: {
+            data: req.file.buffer.toString('base64'),
+            mimetype: req.file.mimetype
+        }});
         const result = await emailController.sendStudentRegistrationEmail(parentName, password, email);
 
         const token = createToken(student._id, ["admin", "user"]);
@@ -74,6 +77,23 @@ module.exports.fetchStudent = async (req, res) => {
         const student = await Student.findById(studentID);
         if(student){
             res.json(student);
+        }else{
+            res.status(404).json({error: "Not Found"});
+        }
+    }catch(err){
+        res.status(500).json({error: err.message});
+    }
+}
+
+module.exports.fetchStudentImage = async (req, res) => {
+    const studentID = req.params.id;
+    try{
+        const student = await Student.findById(studentID);
+        if(student){
+            var b64string = student.image.get('data');
+            var buf = Buffer.from(b64string, 'base64');
+            res.writeHead(200, { "Content-type": student.image.get('mimetype')});
+            res.end(buf);
         }else{
             res.status(404).json({error: "Not Found"});
         }

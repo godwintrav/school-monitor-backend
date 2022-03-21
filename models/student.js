@@ -54,7 +54,12 @@ const studentSchema = new mongoose.Schema({
     batch: {
         type: String,
         required: [true, "Please enter the student batch"],
-    }
+    },
+    image: {
+        type: Map,
+        of: String, 
+        required: [true, "Please upload student picture"]
+  },
     
 
 }, {timestamps: true});
