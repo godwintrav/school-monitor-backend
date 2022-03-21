@@ -1,7 +1,7 @@
 const Event = require('../models/event');
 const errorController = require('./errorController');
 const emailController = require('./emailController');
-const Student = require('../models/Student');
+const Student = require('../models/student');
 
 module.exports.createEvent = async (req, res) => {
     const {date, name, description}  = req.body;

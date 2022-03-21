@@ -1,6 +1,6 @@
 const Grade = require('../models/grade');
 const errorController = require('./errorController');
-const Student = require('../models/Student');
+const Student = require('../models/student');
 const emailController = require('./emailController');
 
 

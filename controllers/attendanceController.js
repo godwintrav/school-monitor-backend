@@ -2,7 +2,7 @@ const Attendance = require('../models/attendance');
 const errorController = require('./errorController');
 var moment = require('moment');
 const emailController = require('./emailController');
-const Student = require('../models/Student');
+const Student = require('../models/student');
 
 
 module.exports.addAttendance = async (req, res) => {

@@ -1,4 +1,4 @@
-const Student = require('../models/Student');
+const Student = require('../models/student');
 const jwt = require('jsonwebtoken');
 const cryptoRandomString = require('crypto-random-string');
 const errorController = require('./errorController');
