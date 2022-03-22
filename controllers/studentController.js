@@ -45,9 +45,11 @@ module.exports.register = async (req, res) => {
 
 module.exports.login = async (req, res) => {
     const {email, password} = req.body;
+    console.log(email+ " " + password);
 
     try{
         const student = await Student.login(email, password);
+        console.log("after login method");
         const token = createToken(student._id, ["user"]);
         //remember to add secure when in production
         res.cookie("user_token", token, { httpOnly: true, maxAge: maxAge * 1000});
