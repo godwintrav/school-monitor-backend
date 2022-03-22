@@ -21,7 +21,7 @@ module.exports.createTeacher = async (req, res) => {
 
 module.exports.fetchTeachers = async (req, res) => {
     try{
-        const teachers = await Teacher.find({});
+        const teachers = await Teacher.find({}, "_id name position email phone");
         if(teachers){
             res.json(teachers);
         }else{
