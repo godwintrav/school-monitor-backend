@@ -32,7 +32,7 @@ module.exports.register = async (req, res) => {
         const token = createToken(student._id, ["admin", "user"]);
         //remember to add secure when in production
         res.cookie("user_token", token, { httpOnly: true, maxAge: maxAge * 1000});
-        res.status(201).json({ student: student._id, token: token });
+        res.status(201).json({ student: student._id, token: "Bearer " + token });
 
     }catch(err){
         console.log(err.code);
@@ -53,7 +53,7 @@ module.exports.login = async (req, res) => {
         const token = createToken(student._id, ["user"]);
         //remember to add secure when in production
         res.cookie("user_token", token, { httpOnly: true, maxAge: maxAge * 1000});
-        res.status(200).json({ student: student._id, token: token });
+        res.status(200).json({ student: student._id, token: "Bearer " + token });
     }catch(err){
         const errors = errorController.handleRegisterErrors(err);
         res.status(400).json({ errors });
