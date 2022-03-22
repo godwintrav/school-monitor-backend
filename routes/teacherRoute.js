@@ -19,7 +19,7 @@ router.post("/add", uploadImg.single('image'), teacherController.createTeacher, 
     console.log(err);
     res.status(400).send({errors: err.message});
 });
-router.get("/", teacherController.fetchTeachers);
+router.get("/", authMiddleware.authorize(["admin", "user"]) ,teacherController.fetchTeachers);
 router.get("/image/:id" , teacherController.fetchTeacherImage);
 
 module.exports = router;
