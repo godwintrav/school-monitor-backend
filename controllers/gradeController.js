@@ -23,7 +23,7 @@ module.exports.addStudentGrade = async (req, res) => {
 module.exports.fetchStudentGrades = async (req, res) => {
     const student = req.params.id;
     try{
-        const grades = await Grade.find({student});
+        const grades = await Grade.find({student}).sort({ createdAt: -1 });
         if(grades){
             res.json(grades);
         }else{

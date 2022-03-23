@@ -24,7 +24,7 @@ module.exports.fetchEvents = async (req, res) => {
     var d = new Date(); 
     console.log(d);
     try{
-        const events = await Event.find({});
+        const events = await Event.find({}).sort({ createdAt: -1 });
         if(events){
             res.json(events);
         }else{

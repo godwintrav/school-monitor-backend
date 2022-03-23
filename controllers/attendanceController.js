@@ -34,3 +34,17 @@ module.exports.addAttendance = async (req, res) => {
     }
 }
 
+module.exports.fetchStudentAttendance = async(req, res) => {
+    const student = req.params.id;
+
+    try {
+        const attended = await Attendance.find({student, attended: true}).sort({ createdAt: -1 });
+        const absent = await Attendance.find({student, attended: false}).sort({ createdAt: -1 });
+        var total = attended.length + absent.length;
+        res.status(200).json({attended, absent, total});
+    }catch(err){
+        console.log(err);
+        res.status(500).json({error: "Error Occured"});
+    }
+}
+

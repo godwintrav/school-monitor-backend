@@ -62,7 +62,7 @@ module.exports.login = async (req, res) => {
 
 module.exports.fetchAllStudents = async (req, res) => {
     try{
-        const students = await Student.find({});
+        const students = await Student.find({}).sort({ createdAt: -1 });
         if(students){
             res.json(students);
         }else{
