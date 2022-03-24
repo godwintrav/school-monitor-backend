@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const cryptoRandomString = require('crypto-random-string');
 const errorController = require('./errorController');
 const emailController = require('./emailController');
+const bcrypt = require('bcrypt');
 
 
 // maximum time for jwt
@@ -99,6 +100,26 @@ module.exports.fetchStudentImage = async (req, res) => {
         }else{
             res.status(404).json({error: "Not Found"});
         }
+    }catch(err){
+        res.status(500).json({error: err.message});
+    }
+}
+
+module.exports.updatePassword = async (req, res) => {
+    const {oldPassword, newPassword} = req.body;
+    const id = req.params.id;
+    try{
+        const student = await Student.findById(id, "password");
+        const auth = await bcrypt.compare(oldPassword, student.password);
+
+            if(auth){
+                const salt = await bcrypt.genSalt();
+                var password = await bcrypt.hash(newPassword, salt);
+                const updatedStudent = await Student.findOneAndUpdate({_id: id}, {$set: {password}});
+                res.status(200).json({ msg: "Password updated successfully" });
+            }else{
+                res.status(401).json({msg: "Incorrect Password"});
+            }
     }catch(err){
         res.status(500).json({error: err.message});
     }

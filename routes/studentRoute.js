@@ -23,5 +23,6 @@ router.post("/login", studentController.login);
 router.get("/all", authMiddleware.authorize(["admin", "user"]) ,studentController.fetchAllStudents);
 router.get("/:id", authMiddleware.authorize(["admin", "user"]) ,studentController.fetchStudent);
 router.get("/image/:id" ,studentController.fetchStudentImage);
+router.post("/password/:id", authMiddleware.authorize(["admin", "user"]), studentController.updatePassword);
 
 module.exports = router;
