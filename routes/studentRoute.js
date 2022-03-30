@@ -20,7 +20,7 @@ router.post("/register", uploadImg.single('image'), studentController.register, 
     res.status(400).send({errors: err.message});
 });
 router.post("/login", studentController.login);
-router.get("/all", authMiddleware.authorize(["admin", "user"]) ,studentController.fetchAllStudents);
+router.get("/all",studentController.fetchAllStudents);
 router.get("/:id", authMiddleware.authorize(["admin", "user"]) ,studentController.fetchStudent);
 router.get("/image/:id" ,studentController.fetchStudentImage);
 router.post("/password/:id", authMiddleware.authorize(["admin", "user"]), studentController.updatePassword);
